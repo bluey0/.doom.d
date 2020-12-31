@@ -61,5 +61,5 @@
 
 ;; set the font
 (setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
-(setq doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18))
+(setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-unicode-font (font-spec :family "Sarasa Fixed J")) ;; this doesn't work for some reason??
