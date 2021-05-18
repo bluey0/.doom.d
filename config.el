@@ -29,7 +29,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org-files/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -54,12 +54,12 @@
 ;; they are implemented.
 
 ;; for org-books
-(setq org-books-file "~/org/books.org")
+(setq org-books-file "~/org-files/books.org")
 
 ;; set the theme
-(setq doom-theme 'naysayer)
+(setq doom-theme 'doom-gruvbox)
 
 ;; set the font
 (setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
-(setq doom-unicode-font (font-spec :family "Sarasa Fixed J")) ;; this doesn't work for some reason??
+(setq doom-unicode-font (font-spec :family "Sarasa Fixed J"))
