@@ -57,7 +57,7 @@
 (setq org-books-file "~/org-files/books.org")
 
 ;; set the theme
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-one)
 
 ;; set the font
 (setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
