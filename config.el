@@ -30,6 +30,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org-files/")
+(setq org-agenda-files (list org-directory))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -57,9 +58,36 @@
 (setq org-books-file "~/org-files/books.org")
 
 ;; set the theme
-(setq doom-theme 'doom-one)
+;;(setq doom-theme 'doom-one)
+;; first, a function that selects a random element from a list
+(defun random-list-element (arg-list)
+  (nth (random (length arg-list)) arg-list))
+;; then we select a random element from the official doom themes list
+(setq doom-theme (random-list-element (list 'doom-one 'doom-one-light
+'doom-vibrant 'doom-1337 'doom-acario-dark 'doom-acario-light 'doom-ayu-mirage
+'doom-ayu-light 'doom-badger 'doom-challenger-deep 'doom-city-lights 'doom-dark+
+'doom-dracula 'doom-ephemeral 'doom-fairy-floss 'doom-flatwhite
+'doom-gruvbox-light 'doom-gruvbox 'doom-henna 'doom-homage-black
+'doom-homage-white 'doom-horizon 'doom-Iosvkem 'doom-ir-black 'doom-laserwave
+'doom-manegarm 'doom-material 'doom-miramare 'doom-molokai 'doom-monokai-classic
+'doom-monokai-pro 'doom-monokai-machine 'doom-monokai-octagon
+'doom-monokai-ristretto 'doom-monokai-spectrum 'doom-moonlight 'doom-nord-light
+'doom-nord 'doom-nova 'doom-oceanic-next 'doom-old-hope 'doom-opera-light
+'doom-opera 'doom-outrun-electric 'doom-palenight 'doom-peacock 'doom-plain-dark
+'doom-plain 'doom-rouge 'doom-shades-of-purple 'doom-snazzy 'doom-solarized-dark
+'doom-solarized-dark-high-contrast 'doom-solarized-light 'doom-sourcerer
+'doom-spacegrey 'doom-tomorrow-day 'doom-tomorrow-night 'doom-wilmersdorf
+'doom-xcode 'doom-zenburn)))
 
 ;; set the font
 (setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-unicode-font (font-spec :family "Sarasa Fixed J"))
+
+;; elfeed
+(map! :leader
+      (:prefix ("a" . "applications")
+      :desc "Open Elfeed (rss)"
+      "f" #'elfeed))
+;; automatically update feed when opening elfeed
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
