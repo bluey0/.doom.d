@@ -63,14 +63,6 @@
 (setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-unicode-font (font-spec :family "Sarasa Fixed J"))
 
-;; elfeed
-(map! :leader
-      (:prefix ("a" . "applications")
-      :desc "Open Elfeed (rss)"
-      "f" #'=rss))
-;; automatically update feed when opening elfeed
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-
 ;; scrolling
 ;; better mouse scrolling
 (setq mouse-wheel-scroll-amount '(0.07))
@@ -78,36 +70,3 @@
 ;; scrolling doesn't fuck up the cursor
 (setq scroll-preserve-screen-position nil)
 
-;; mail
-;; location of maildir
-(setq mu4e-maildir (expand-file-name "~/.mail"))
-(setq mu4e-change-filenames-when-moving t)
-(setq smtpmail-queue-mail nil  ;; start in normal mode
-      smtpmail-queue-dir   "~/.mail/queue/cur")
-(setq message-confirm-send t)
-;; contexts - multiple email addresses
-(with-eval-after-load 'mu4e
-  (setq mu4e-contexts
-        `( ,(make-mu4e-context
-             :name "All"
-             :enter-func (lambda () (mu4e-message "Entering All context"))
-             :leave-func (lambda () (mu4e-message "Leaving All context"))
-             ;; we match based on the contact-fields of the message
-             :vars '( ( user-mail-address         . "lcd359.khoa@gmail.com"  )
-                      ( user-full-name            . "Vu Hoang Khoa" )
-                      ( mu4e-compose-signature    . nil )))
-           ,(make-mu4e-context
-             :name "Private"
-             :enter-func (lambda () (mu4e-message "Switch to the Private context"))
-             :match-func (lambda (msg) (when msg (mu4e-message-contact-field-matches msg :to "lcd359.khoa@gmail.com")))
-             :vars '( ( user-mail-address         . "lcd359.khoa@gmail.com"  )
-                      ( user-full-name            . "Vu Hoang Khoa" )
-                      ( mu4e-compose-signature    . nil )))
-
-           ,(make-mu4e-context
-             :name "School"
-             :enter-func (lambda () (mu4e-message "Switch to the School context"))
-             :match-func (lambda (msg) (when msg (mu4e-message-contact-field-matches msg :to "khoavhsa130239@fpt.edu.vn")))
-             :vars '( ( user-mail-address         . "khoavhsa130239@fpt.edu.vn" )
-                      ( user-full-name            . "Vu Hoang Khoa" )
-                      ( mu4e-compose-signature    . nil ))))))
