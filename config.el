@@ -3,12 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "bluey"
-      user-mail-address "lcd359.khoa@gmail.com")
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -27,18 +21,8 @@
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-one)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org-files/")
-(setq org-agenda-files (list org-directory))
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
-
-
 ;; Here are some additional functions/macros that could help you configure Doom:
-;;
+
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
@@ -54,30 +38,25 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; for org-books
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets.
+(setq user-full-name "bluey"
+      user-mail-address "lcd359.khoa@gmail.com")
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org-files/")
+(setq org-agenda-files (list org-directory))
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type nil)
+
+;; set org-books directory
 (setq org-books-file "~/org-files/books.org")
 
 ;; set the theme
-;;(setq doom-theme 'doom-one)
-;; first, a function that selects a random element from a list
-(defun random-list-element (arg-list)
-  (nth (random (length arg-list)) arg-list))
-;; then we select a random element from the official doom themes list
-(setq doom-theme (random-list-element (list 'doom-one 'doom-one-light
-'doom-vibrant 'doom-1337 'doom-acario-dark 'doom-acario-light 'doom-ayu-mirage
-'doom-ayu-light 'doom-badger 'doom-challenger-deep 'doom-city-lights 'doom-dark+
-'doom-dracula 'doom-ephemeral 'doom-fairy-floss 'doom-flatwhite
-'doom-gruvbox-light 'doom-gruvbox 'doom-henna 'doom-homage-black
-'doom-homage-white 'doom-horizon 'doom-Iosvkem 'doom-ir-black 'doom-laserwave
-'doom-manegarm 'doom-material 'doom-miramare 'doom-molokai 'doom-monokai-classic
-'doom-monokai-pro 'doom-monokai-machine 'doom-monokai-octagon
-'doom-monokai-ristretto 'doom-monokai-spectrum 'doom-moonlight 'doom-nord-light
-'doom-nord 'doom-nova 'doom-oceanic-next 'doom-old-hope 'doom-opera-light
-'doom-opera 'doom-outrun-electric 'doom-palenight 'doom-peacock 'doom-plain-dark
-'doom-plain 'doom-rouge 'doom-shades-of-purple 'doom-snazzy 'doom-solarized-dark
-'doom-solarized-dark-high-contrast 'doom-solarized-light 'doom-sourcerer
-'doom-spacegrey 'doom-tomorrow-day 'doom-tomorrow-night 'doom-wilmersdorf
-'doom-xcode 'doom-zenburn)))
+(setq doom-theme 'doom-gruvbox)
 
 ;; set the font
 (setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
@@ -88,6 +67,47 @@
 (map! :leader
       (:prefix ("a" . "applications")
       :desc "Open Elfeed (rss)"
-      "f" #'elfeed))
+      "f" #'=rss))
 ;; automatically update feed when opening elfeed
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+
+;; scrolling
+;; better mouse scrolling
+(setq mouse-wheel-scroll-amount '(0.07))
+(setq mouse-wheel-progressive-speed nil)
+;; scrolling doesn't fuck up the cursor
+(setq scroll-preserve-screen-position nil)
+
+;; mail
+;; location of maildir
+(setq mu4e-maildir (expand-file-name "~/.mail"))
+(setq mu4e-change-filenames-when-moving t)
+(setq smtpmail-queue-mail nil  ;; start in normal mode
+      smtpmail-queue-dir   "~/.mail/queue/cur")
+(setq message-confirm-send t)
+;; contexts - multiple email addresses
+(with-eval-after-load 'mu4e
+  (setq mu4e-contexts
+        `( ,(make-mu4e-context
+             :name "All"
+             :enter-func (lambda () (mu4e-message "Entering All context"))
+             :leave-func (lambda () (mu4e-message "Leaving All context"))
+             ;; we match based on the contact-fields of the message
+             :vars '( ( user-mail-address         . "lcd359.khoa@gmail.com"  )
+                      ( user-full-name            . "Vu Hoang Khoa" )
+                      ( mu4e-compose-signature    . nil )))
+           ,(make-mu4e-context
+             :name "Private"
+             :enter-func (lambda () (mu4e-message "Switch to the Private context"))
+             :match-func (lambda (msg) (when msg (mu4e-message-contact-field-matches msg :to "lcd359.khoa@gmail.com")))
+             :vars '( ( user-mail-address         . "lcd359.khoa@gmail.com"  )
+                      ( user-full-name            . "Vu Hoang Khoa" )
+                      ( mu4e-compose-signature    . nil )))
+
+           ,(make-mu4e-context
+             :name "School"
+             :enter-func (lambda () (mu4e-message "Switch to the School context"))
+             :match-func (lambda (msg) (when msg (mu4e-message-contact-field-matches msg :to "khoavhsa130239@fpt.edu.vn")))
+             :vars '( ( user-mail-address         . "khoavhsa130239@fpt.edu.vn" )
+                      ( user-full-name            . "Vu Hoang Khoa" )
+                      ( mu4e-compose-signature    . nil ))))))
