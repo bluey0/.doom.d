@@ -63,6 +63,16 @@
 (setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
 (setq doom-unicode-font (font-spec :family "Sarasa Fixed J"))
 
+;; elfeed
+(map! :leader
+      (:prefix ("a" . "applications")
+      :desc "Open Elfeed (rss)"
+      "f" #'=rss))
+;; automatically update feed when opening elfeed
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+(map! :map elfeed-search-mode-map
+      "c" 'elfeed-search-clear-filter)
+
 ;; scrolling
 ;; better mouse scrolling
 (setq mouse-wheel-scroll-amount '(0.07))
@@ -70,3 +80,12 @@
 ;; scrolling doesn't fuck up the cursor
 (setq scroll-preserve-screen-position nil)
 
+;; open magit on yadm repo by evaluating (magit-status "/yadm::")
+(require 'tramp)
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))
