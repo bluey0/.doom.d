@@ -71,7 +71,7 @@
 ;; automatically update feed when opening elfeed
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 (map! :map elfeed-search-mode-map
-      "c" 'elfeed-search-clear-filter)
+      :n "c" #'elfeed-search-clear-filter)
 
 ;; scrolling
 ;; better mouse scrolling
