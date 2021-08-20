@@ -59,9 +59,9 @@
 (setq doom-theme 'doom-gruvbox)
 
 ;; set the font
-(setq doom-font (font-spec :family "Sarasa Fixed J" :size 18))
-(setq doom-variable-pitch-font (font-spec :family "Sarasa Fixed J" :size 18))
-(setq doom-unicode-font (font-spec :family "Sarasa Fixed J"))
+(setq doom-font (font-spec :family "Sarasa Fixed J" :size 18)
+      doom-variable-pitch-font doom-font
+      doom-unicode-font doom-font)
 
 ;; elfeed
 (map! :leader
