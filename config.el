@@ -45,3 +45,17 @@
       '(("n" "default" plain "%?" :if-new
          (file+head "%<%Y%m%d%H%M>.org" "#+title: ${title}\n")
          :unnarrowed t)))
+;; search within roam notes using doom's search function
+(defun org-roam-search ()
+  "Perform a text search on `org-roam-directory'."
+  (interactive)
+  (require 'org-roam)
+  (let ((default-directory org-roam-directory))
+    (+default/search-project-for-symbol-at-point "")))
+;; map search function to SPC n r S
+(map! :leader
+       (:prefix ("n" . "notes")
+        (:when (featurep! :lang org +roam2)
+         (:prefix ("r" . "roam")
+          :desc "Search all notes"
+          "S" #'org-roam-search))))
