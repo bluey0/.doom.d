@@ -43,5 +43,5 @@
 (setq org-roam-directory (concat org-directory-hub "roam/"))
 (setq org-roam-capture-templates
       '(("n" "default" plain "%?" :if-new
-         (file+head "%<%Y%m%d%H%M%S>.org" "#+title: ${title}\n")
+         (file+head "%<%Y%m%d%H%M>.org" "#+title: ${title}\n")
          :unnarrowed t)))
