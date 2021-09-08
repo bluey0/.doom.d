@@ -25,7 +25,7 @@
 
 ;; elfeed
 (map! :leader
-      (:prefix ("a" . "applications")
+      (:prefix ("z" . "applications")
       :desc "Open Elfeed (rss)"
       "f" #'=rss))
 ;; automatically update feed when opening elfeed
