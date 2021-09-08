@@ -59,3 +59,14 @@
          (:prefix ("r" . "roam")
           :desc "Search all notes"
           "S" #'org-roam-search))))
+
+;; showing diff between init and example
+(defun doom/ediff-init-and-example ()
+  "ediff the current `init.el' with the example in doom-emacs-dir"
+  (interactive)
+  (ediff-files (concat doom-private-dir "init.el")
+               (concat doom-emacs-dir "init.example.el")))
+
+(define-key! help-map
+  "di"   #'doom/ediff-init-and-example
+  )
