@@ -7,9 +7,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory-hub "~/org-files/")
-(setq org-directory (concat org-directory-hub "notes/"))
-(setq org-agenda-files (list org-directory))
+(setq org-directory-hub "~/org-files/"
+      org-directory (concat org-directory-hub "notes/")
+      org-agenda-files (list org-directory))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -35,13 +35,13 @@
 
 ;; scrolling
 ;; better mouse scrolling
-(setq mouse-wheel-scroll-amount '(0.07))
-(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-scroll-amount '(0.07)
+      mouse-wheel-progressive-speed nil)
 ;; scrolling doesn't fuck up the cursor
 
 ;; org-roam
-(setq org-roam-directory (concat org-directory-hub "roam/"))
-(setq org-roam-capture-templates
+(setq org-roam-directory (concat org-directory-hub "roam/")
+      org-roam-capture-templates
       '(("n" "default" plain "%?" :if-new
          (file+head "%<%Y%m%d%H%M>.org" "#+title: ${title}\n")
          :unnarrowed t)))
