@@ -103,10 +103,3 @@
 
 ;; org-journal
 (setq org-journal-dir (concat org-directory-hub "journal/"))
-
-
-;; calendar
-(map! :leader
-      (:prefix ("z" . "applications")
-      :desc "Open Calendar"
-      "c" #'=calendar))
