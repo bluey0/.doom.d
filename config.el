@@ -30,11 +30,13 @@
 ;; org-capture
 (after! org
   (setq +org-capture-notes-file "inbox.org"
-        +org-capture-todo-file "inbox.org"
         org-capture-templates
         '(("n" "Inbox" entry
            (file+headline +org-capture-notes-file "Inbox")
-           "* %u %?" :prepend t))))
+           "* %u %?" :prepend t)
+          ("N" "Tickler" entry
+           (file+headline "tickler.org" "Tickler")
+           "* %^t %?" :time-prompt t :prepend t))))
 
 
 ;; elfeed
