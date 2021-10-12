@@ -38,9 +38,6 @@
 
 
 ;; elfeed
-(after! elfeed
-  (setq elfeed-db-directory (concat org-directory-hub "elfeed/db/")
-        elfeed-enclosure-default-dir (concat org-directory-hub "elfeed/enclosures/")))
 (map! :leader
       (:prefix ("z" . "applications")
       :desc "Open Elfeed (rss)"
