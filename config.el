@@ -9,7 +9,9 @@
 ;; change `org-directory'. It must be set before org loads!
 (defvar org-directory-hub "~/org-files/")
 (setq org-directory (concat org-directory-hub "notes/")
-      org-agenda-files (list org-directory))
+      org-agenda-files (list (concat org-directory "inbox.org")
+                             (concat org-directory "notes.org")
+                             (concat org-directory "tickler.org")))
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
