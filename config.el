@@ -22,7 +22,7 @@
 (setq doom-theme 'doom-gruvbox)
 
 ;; set the font
-(setq doom-font (font-spec :family "Sarasa Fixed J" :size 18)
+(setq doom-font (font-spec :family "Sarasa Mono J" :size 18)
       doom-variable-pitch-font doom-font
       doom-unicode-font doom-font)
 
@@ -104,3 +104,17 @@
 
 ;; org-journal
 (setq org-journal-dir (concat org-directory-hub "journal/"))
+
+;; biblio
+(after! citar
+  (setq! citar-bibliography '("~/org-files/archive/biblio.bib")))
+
+;; hack to enable opening links on windows WSL
+(when (and (eq system-type 'gnu/linux)
+           (string-match
+            "Linux.*Microsoft.*Linux"
+            (shell-command-to-string "uname -a")))
+  (setq
+   browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+   browse-url-generic-args     '("/c" "start")
+   browse-url-browser-function #'browse-url-generic))
