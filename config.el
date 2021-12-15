@@ -105,6 +105,5 @@
 ;; org-journal
 (setq org-journal-dir (concat org-directory-hub "journal/"))
 
-;; biblio
-(after! citar
-  (setq! citar-bibliography '("~/org-files/archive/biblio.bib")))
+;; company does not automatically hook on org-mode
+(setq company-global-modes '(not org-mode))
