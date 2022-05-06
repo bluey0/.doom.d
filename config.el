@@ -114,23 +114,3 @@
 
 ;; company does not automatically hook on org-mode
 (setq company-global-modes '(not org-mode))
-
-
-;; org-journal
-(setq org-journal-dir (concat org-directory-hub "journal/")
-      org-journal-file-format "%Y%m%d.org"
-      org-journal-time-format "")
-(map!
- :map (calendar-mode-map)
- :localleader
- (:prefix ("j" . "journal") ;; org-journal bindings
-  :desc "Display journal entry" "d" #'org-journal-display-entry
-  :desc "Read entry" "r" #'org-journal-read-entry
-  :desc "Mark entry" "m" #'org-journal-mark-entries
-  :desc "New date entry" "j" #'org-journal-new-date-entry
-  (:prefix "s"
-   "f" #'org-journal-search-forever
-   "F" #'org-journal-search-future
-   "w" #'org-journal-search-calendar-week
-   "m" #'org-journal-search-calendar-month
-   "y" #'org-journal-search-calendar-year)))
