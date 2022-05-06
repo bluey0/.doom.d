@@ -26,6 +26,11 @@
       doom-variable-pitch-font doom-font
       doom-unicode-font doom-font)
 
+;; Windows specific configs
+;; Window's clipboard can now encode non-ascii characters properly
+(if (eq system-type 'windows-nt)
+    (set-selection-coding-system 'utf-16-le)
+)
 
 ;; org-capture
 (after! org
