@@ -29,8 +29,7 @@
 ;; Windows specific configs
 ;; Window's clipboard can now encode non-ascii characters properly
 (if (eq system-type 'windows-nt)
-    (set-selection-coding-system 'utf-16-le)
-)
+    (set-selection-coding-system 'utf-16-le))
 
 ;; org-capture
 (after! org
@@ -46,8 +45,8 @@
 ;; elfeed
 (map! :leader
       (:prefix ("z" . "applications")
-      :desc "Open Elfeed (rss)"
-      "f" #'=rss))
+       :desc "Open Elfeed (rss)"
+       "f" #'=rss))
 ;; automatically update feed when opening elfeed
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 (map! :map elfeed-search-mode-map
@@ -79,11 +78,11 @@
    query org-roam-directory))
 ;; map search function to SPC n r S
 (map! :leader
-       (:prefix ("n" . "notes")
-        (:when (featurep! :lang org +roam2)
-         (:prefix ("r" . "roam")
-          :desc "Search all notes"
-          "S" #'org-roam-search))))
+      (:prefix ("n" . "notes")
+       (:when (featurep! :lang org +roam2)
+        (:prefix ("r" . "roam")
+         :desc "Search all notes"
+         "S" #'org-roam-search))))
 
 
 ;; showing diff between init and example
@@ -97,19 +96,19 @@
 
 
 ;; org-roam-ui
- (use-package! websocket
-    :after org-roam)
+(use-package! websocket
+  :after org-roam)
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 
 ;; company does not automatically hook on org-mode
