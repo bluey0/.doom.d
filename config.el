@@ -27,9 +27,11 @@
       doom-unicode-font doom-font)
 
 ;; Windows specific configs
-;; Window's clipboard can now encode non-ascii characters properly
 (if (eq system-type 'windows-nt)
-    (set-selection-coding-system 'utf-16-le))
+    ;; Window's clipboard can now encode non-ascii characters properly
+    (and (set-selection-coding-system 'utf-16-le)
+         ;; Set $HOME as default directory regardless of where emacs is placed
+         (setq default-directory "~/")))
 
 ;; org-capture
 (after! org
