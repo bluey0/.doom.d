@@ -81,7 +81,7 @@
 ;; map search function to SPC n r S
 (map! :leader
       (:prefix ("n" . "notes")
-       (:when (featurep! :lang org +roam2)
+       (:when (modulep! :lang org +roam2)
         (:prefix ("r" . "roam")
          :desc "Search all notes"
          "S" #'org-roam-search))))
@@ -91,7 +91,7 @@
 (defun doom/ediff-init-and-example ()
   "ediff the current `init.el' with the example in doom-emacs-dir"
   (interactive)
-  (ediff-files (concat doom-private-dir "init.el")
+  (ediff-files (concat doom-user-dir "init.el")
                (concat doom-emacs-dir "init.example.el")))
 (define-key! help-map
   "di"   #'doom/ediff-init-and-example)
